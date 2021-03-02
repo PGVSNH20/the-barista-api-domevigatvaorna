@@ -21,6 +21,11 @@ class Espresso : IBeverage
  
     public string CupType => throw new System.NotImplementedException();
 
+    public Espresso()
+    {
+        Ingredients = new List<Ingredient>();
+    }
+
     public IBeverage AddWater(int amount)
     {
         Ingredients.Add(new Ingredient() { Name = "Water", Amount = amount});
