@@ -3,6 +3,7 @@ using System.Collections.Generic;
 public interface IBeverage{
 	List<string> Ingredients { get; }
     string CupType { get; }
+    int Amount { get; }
 }
 
 class Espresso : IBeverage
