@@ -2,8 +2,7 @@ using System.Collections.Generic;
 
 public interface IBeverage{
 	List<string> Ingredients { get; }
-    string CupType { get; }
-    int Amount { get; }
+    string CupType { get; }  
 }
 
 class Espresso : IBeverage
@@ -19,3 +18,5 @@ class Latte : IBeverage
 
     public string CupType => throw new System.NotImplementedException();
 }
+
+public  AddWater
