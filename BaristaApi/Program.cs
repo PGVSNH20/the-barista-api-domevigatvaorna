@@ -6,7 +6,8 @@ namespace BaristaApi
     {
         static void Main(string[] args)
         {
-            EspressoMachine espressoMachine = new EspressoMachine().AddWater(20).AddMilk(20).ToBeverage() as EspressoMachine;
+            EspressoMachine espresso = new EspressoMachine().AddWater(20).AddBeans(20).ToBeverage() as EspressoMachine;
+            Latte latte = new EspressoMachine().AddWater(20).AddBeans(15, EspressoMachine.BeanTypes.).AddMilk(20).ToBeverage() as Latte;
 
             /* pseudo-code
             Espresso espresso = new EspressoMachine().AddWater(20).AddBeans(b => b.AmountInG = 5 && b.Sort = CoffeSorts.Robusta).ToBravage();

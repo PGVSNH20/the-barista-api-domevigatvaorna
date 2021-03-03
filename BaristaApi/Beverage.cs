@@ -6,7 +6,7 @@ public interface IBeverage{
     string CupType { get; }
     IBeverage AddWater(int amount);
     IBeverage AddMilk(int amount);
-    IBeverage AddBeans(int amount);
+    IBeverage AddBeans(int amount, string type);
     object ToBeverage();
 }
 
@@ -16,15 +16,18 @@ public class Ingredient
     public int Amount { get; set; }
 }
 
-class EspressoMachine : IBeverage
+
+public class EspressoMachine : IBeverage
 {
     public List<Ingredient> Ingredients { get; }
+    public static string[] BeanTypes { get; set; }
  
     public string CupType => throw new System.NotImplementedException();
 
     public EspressoMachine()
     {
         Ingredients = new List<Ingredient>();
+        BeanTypes = new string[] { "Robusta", "Jamaican", "Columbian", "Arabica", "Kopi Luwak" };
     }
 
     public IBeverage AddWater(int amount)
@@ -38,9 +41,9 @@ class EspressoMachine : IBeverage
         Ingredients.Add(new Ingredient() { Name = "Milk", Amount = amount });
         return this;
     }
-    public IBeverage AddBeans(int amount)
+    public IBeverage AddBeans(int amount, string type)
     {
-        Ingredients.Add(new Ingredient() { Name = "Bean", Amount = amount });
+        Ingredients.Add(new Ingredient() { Name = type, Amount = amount });
         return this;
     }
 
