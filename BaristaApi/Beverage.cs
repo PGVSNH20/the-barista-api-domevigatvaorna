@@ -1,13 +1,18 @@
 using System;
 using System.Collections.Generic;
 
-public interface IBeverage{
-	List<Ingredient> Ingredients { get; }
+public abstract class Beverage
+{
+    List<Ingredient> Ingredients { get; }
     string CupType { get; }
-    IBeverage AddWater(int amount);
-    IBeverage AddMilk(int amount);
-    IBeverage AddBeans(int amount, string type);
-    object ToBeverage();
+}
+
+public interface IEspressoMachine{
+    IEspressoMachine AddWater(int amount);
+    IEspressoMachine AddMilk(int amount);
+    IEspressoMachine AddBeans(int amount);
+    IEspressoMachine BeanType(string name);
+    Beverage ToBeverage();
 }
 
 public class Ingredient
@@ -17,47 +22,53 @@ public class Ingredient
 }
 
 
-public class EspressoMachine : IBeverage
+public class EspressoMachine : IEspressoMachine
 {
     public List<Ingredient> Ingredients { get; }
-    public static string[] BeanTypes { get; set; }
+    //public static string[] BeanTypes { get; set; }
  
     public string CupType => throw new System.NotImplementedException();
 
     public EspressoMachine()
     {
         Ingredients = new List<Ingredient>();
-        BeanTypes = new string[] { "Robusta", "Jamaican", "Columbian", "Arabica", "Kopi Luwak" };
+        //BeanTypes = new string[] { "Robusta", "Jamaican", "Columbian", "Arabica", "Kopi Luwak" };
     }
 
-    public IBeverage AddWater(int amount)
+    public IEspressoMachine AddWater(int amount)
     {
         Ingredients.Add(new Ingredient() { Name = "Water", Amount = amount});
         return this;
     }
 
-    public IBeverage AddMilk(int amount)
+    public IEspressoMachine AddMilk(int amount)
     {
         Ingredients.Add(new Ingredient() { Name = "Milk", Amount = amount });
         return this;
     }
-    public IBeverage AddBeans(int amount, string type)
+    public IEspressoMachine AddBeans(int amount)
     {
-        Ingredients.Add(new Ingredient() { Name = type, Amount = amount });
+        Ingredients.Add(new Ingredient() { Name = "Bean", Amount = amount });
         return this;
     }
 
-    public object ToBeverage()
+    public IEspressoMachine BeanType (string name)
     {
+        Ingredients.Add(new Ingredient() { Name = "BeanType" });
         return this;
+    }
+
+    public Beverage ToBeverage()
+    {
+        return new Latte();
     }
 }
 
-class Latte : EspressoMachine
+class Latte : Beverage
 {
     public Latte()
     {
-        Ingredients.Add(new Ingredient() { Name = })
+        //Ingredients.Add(new Ingredient() { Name = })
     }
 }
 
