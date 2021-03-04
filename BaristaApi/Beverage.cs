@@ -1,5 +1,10 @@
 using System;
+using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
+using System.Reflection;
+using System.Reflection.Metadata.Ecma335;
+using BaristaApi.Classes;
 
 public abstract class Beverage
 {
@@ -60,6 +65,17 @@ public class EspressoMachine : IEspressoMachine
 
     public Beverage ToBeverage()
     {
+        Assembly assembly = typeof(EspressoMachine).Assembly;
+        Type target = typeof(Beverage);
+        var types = assembly.GetTypes()
+            .Where(type => target.IsAssignableFrom(type));
+
+        foreach (Type type in types)
+        {
+            Console.WriteLine(type.Name);
+            //<Beverage>type.Name.IsStuff;
+            //return new type();
+        }
         return new Latte();
     }
 }
@@ -69,6 +85,13 @@ class Latte : Beverage
     public Latte()
     {
         //Ingredients.Add(new Ingredient() { Name = })
+        
+    }
+
+    public bool IsStuff(Ingredient[] ingredients)
+    {
+        bool result = true;
+        return result;
     }
 }
 
