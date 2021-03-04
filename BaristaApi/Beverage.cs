@@ -54,16 +54,49 @@ public class EspressoMachine : IEspressoMachine
 
     public IEspressoMachine BeanType (string name)
     {
-        Ingredients.Add(new Ingredient() { Name = "BeanType" });
+        Ingredients.Add(new Ingredient() { Name = name });
         return this;
     }
 
     public Beverage ToBeverage()
     {
-        return new Latte();
+        int? beverageType = null;
+
+		foreach (var item in collection)
+		{
+			if (true)
+			{
+
+			}
+		}
+		switch (beverageType)
+		{
+            case 1:
+                return new Espresso();
+            case 2: 
+                return new Latte();
+            case 3:
+                return new Mocha();
+            case 4:
+                return new Americano();
+            case 5:
+                return new Cappuccino();
+            case 6:
+                return new Macchiato();
+            default:
+                return new CustomBeverage();
+		}
     }
 }
 
+//Coffee Types
+class Espresso : Beverage
+{
+    public Espresso()
+    {
+
+    }
+}
 class Latte : Beverage
 {
     public Latte()
@@ -71,7 +104,41 @@ class Latte : Beverage
         //Ingredients.Add(new Ingredient() { Name = })
     }
 }
+class Mocha : Beverage
+{
+    public Mocha()
+    {
 
+    }
+}
+class Americano : Beverage
+{
+    public Americano()
+    {
+
+    }
+}
+class Cappuccino : Beverage
+{
+    public Cappuccino()
+    {
+
+    }
+}
+class Macchiato : Beverage
+{
+    public Macchiato()
+    {
+
+    }
+}
+class CustomBeverage : Beverage
+{
+    public CustomBeverage()
+    {
+
+    }
+}
 
 //class Latte : IBeverage
 //{

@@ -6,8 +6,8 @@ namespace BaristaApi
     {
         static void Main(string[] args)
         {
-                        
-            Beverage latte = new EspressoMachine().AddWater(20).AddBeans(15).AddMilk(20).ToBeverage();
+            //Latte input example
+            Beverage input = new EspressoMachine().AddWater(20).AddBeans(15).AddMilk(20).ToBeverage();
 
 
 
