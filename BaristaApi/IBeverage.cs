@@ -1,12 +1,10 @@
 using System;
-using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
-using System.Reflection.Metadata.Ecma335;
-using BaristaApi.Classes;
 
-public abstract class Beverage
+
+public interface IBeverage
 {
     List<Ingredient> Ingredients { get; }
     string CupType { get; }
@@ -18,7 +16,7 @@ public interface IEspressoMachine
     IEspressoMachine AddMilk(int amount);
     IEspressoMachine AddBeans(int amount);
     IEspressoMachine BeanType(string name);
-    Beverage ToBeverage();
+    IBeverage ToBeverage();
 }
 
 public class Ingredient
@@ -64,10 +62,10 @@ public class EspressoMachine : IEspressoMachine
         return this;
     }
 
-    public Beverage ToBeverage()
+    public IBeverage ToBeverage()
     {
         Assembly assembly = typeof(EspressoMachine).Assembly;
-        Type target = typeof(Beverage);
+        Type target = typeof(IBeverage);
         var types = assembly.GetTypes()
             .Where(type => target.IsAssignableFrom(type));
 
@@ -82,20 +80,30 @@ public class EspressoMachine : IEspressoMachine
 }
 
 //Coffee Types
-class Espresso : Beverage
+class Espresso : IBeverage
 {
+    List<Ingredient> IBeverage.Ingredients { get; }
+
+    public string CupType => throw new NotImplementedException();
     public Espresso()
     {
-
+        Ingredients = new List<Ingredient>();
+        Ingredients.Add(new Ingredient() { Name = "Water", Amount = 25 });
     }
+
+    
 }
-class Latte : Beverage
+class Latte : IBeverage
 {
     public Latte()
     {
-        //Ingredients.Add(new Ingredient() { Name = })
-        
+      //  Ingredients = new List<Ingredient>();
+      //  Ingredients.Add(new Ingredient() { Name = "Water", Amount = 25 });
     }
+
+    List<Ingredient> IBeverage.Ingredients => throw new NotImplementedException();
+
+    string IBeverage.CupType => throw new NotImplementedException();
 
     public bool IsStuff(Ingredient[] ingredients)
     {
@@ -103,40 +111,60 @@ class Latte : Beverage
         return result;
     }
 }
-class Mocha : Beverage
+class Mocha : IBeverage
 {
     public Mocha()
     {
 
     }
+
+    List<Ingredient> IBeverage.Ingredients => throw new NotImplementedException();
+
+    string IBeverage.CupType => throw new NotImplementedException();
 }
-class Americano : Beverage
+class Americano : IBeverage
 {
     public Americano()
     {
 
     }
+
+    List<Ingredient> IBeverage.Ingredients => throw new NotImplementedException();
+
+    string IBeverage.CupType => throw new NotImplementedException();
 }
-class Cappuccino : Beverage
+class Cappuccino : IBeverage
 {
     public Cappuccino()
     {
 
     }
+
+    List<Ingredient> IBeverage.Ingredients => throw new NotImplementedException();
+
+    string IBeverage.CupType => throw new NotImplementedException();
 }
-class Macchiato : Beverage
+class Macchiato : IBeverage
 {
     public Macchiato()
     {
 
     }
+
+    List<Ingredient> IBeverage.Ingredients => throw new NotImplementedException();
+
+    string IBeverage.CupType => throw new NotImplementedException();
 }
-class CustomBeverage : Beverage
+class CustomBeverage : IBeverage
 {
     public CustomBeverage()
     {
 
     }
+
+    List<Ingredient> IBeverage.Ingredients => throw new NotImplementedException();
+
+    string IBeverage.CupType => throw new NotImplementedException();
 }
 
 //class Latte : IBeverage
