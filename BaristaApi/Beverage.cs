@@ -7,7 +7,8 @@ public abstract class Beverage
     string CupType { get; }
 }
 
-public interface IEspressoMachine{
+public interface IEspressoMachine
+{
     IEspressoMachine AddWater(int amount);
     IEspressoMachine AddMilk(int amount);
     IEspressoMachine AddBeans(int amount);
@@ -26,7 +27,7 @@ public class EspressoMachine : IEspressoMachine
 {
     public List<Ingredient> Ingredients { get; }
     //public static string[] BeanTypes { get; set; }
- 
+
     public string CupType => throw new System.NotImplementedException();
 
     public EspressoMachine()
@@ -37,7 +38,7 @@ public class EspressoMachine : IEspressoMachine
 
     public IEspressoMachine AddWater(int amount)
     {
-        Ingredients.Add(new Ingredient() { Name = "Water", Amount = amount});
+        Ingredients.Add(new Ingredient() { Name = "Water", Amount = amount });
         return this;
     }
 
@@ -52,7 +53,7 @@ public class EspressoMachine : IEspressoMachine
         return this;
     }
 
-    public IEspressoMachine BeanType (string name)
+    public IEspressoMachine BeanType(string name)
     {
         Ingredients.Add(new Ingredient() { Name = name });
         return this;
@@ -62,18 +63,18 @@ public class EspressoMachine : IEspressoMachine
     {
         int? beverageType = null;
 
-		foreach (var item in collection)
+        /*foreach (var item in collection)
 		{
 			if (true)
 			{
 
 			}
-		}
-		switch (beverageType)
-		{
+		}*/
+        switch (beverageType)
+        {
             case 1:
                 return new Espresso();
-            case 2: 
+            case 2:
                 return new Latte();
             case 3:
                 return new Mocha();
@@ -85,7 +86,7 @@ public class EspressoMachine : IEspressoMachine
                 return new Macchiato();
             default:
                 return new CustomBeverage();
-		}
+        }
     }
 }
 
