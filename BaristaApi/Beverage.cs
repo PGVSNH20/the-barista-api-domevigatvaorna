@@ -54,7 +54,7 @@ public class EspressoMachine : IEspressoMachine
 
     public IEspressoMachine BeanType (string name)
     {
-        Ingredients.Add(new Ingredient() { Name = "BeanType" });
+        Ingredients.Add(new Ingredient() { Name = name });
         return this;
     }
 
