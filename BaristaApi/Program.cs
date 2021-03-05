@@ -7,12 +7,12 @@ namespace BaristaApi
         static void Main(string[] args)
         {
             //Espresso input example
-            Beverage coffee = new EspressoMachine().AddWater(25).AddBeans(BeanTypes.BeanEnum.Robusta.ToString(), 15).ToBeverage();
+            Beverage coffee = new EspressoMachine().AddWater(25).AddBeans(BeanTypes.BeanEnum.Robusta.ToString(), 27).ToBeverage();
 
             Console.WriteLine("Got a " + coffee.CupType.ToLower() + " cup of " + coffee.ToString()?.ToLower());
 
             //Latte input example
-            Beverage coffee2 = new EspressoMachine().AddMilk(25).AddBeans(BeanTypes.Beans[3], 15).ToBeverage();
+            Beverage coffee2 = new EspressoMachine().AddMilk(25).AddBeans(BeanTypes.BeanEnum.KopiLuwak.ToString(), 23).ToBeverage();
 
             Console.WriteLine("Got a " + coffee2.CupType.ToLower() + " cup of " + coffee2.ToString()?.ToLower());
 

@@ -21,7 +21,7 @@ public class Beverage
             {
                 //Ingredient was found, moving on to next ingredient
                 //TODO: Check amount needed and not just name (within percentage of required amount/share?)
-                if (ingredient.Name == inputIngredient.Name)
+                if (ingredient.Name == inputIngredient.Name && inputIngredient.Amount <= ingredient.Amount +5 && inputIngredient.Amount >= ingredient.Amount -2)
                 {
                     break;
                 }
@@ -43,15 +43,15 @@ public class Beverage
 public static class BeanTypes
 {
     //TODO: Some proper way of making either of these easy to use?
-    public static string[] Beans = new[]
-    {
-        "Robusta", "Jamaican", "Columbian", "Arabica", "Kopi Luwak"
-    };
+    //public static string[] Beans = new[]
+    //{
+    //    "Robusta", "Jamaican", "Columbian", "Arabica", "Kopi Luwak"
+    //};
 
-    public static List<string> BeanList = new List<string>
-    {
-        "Robusta", "Jamaican", "Columbian", "Arabica", "Kopi Luwak"
-    };
+    //public static List<string> BeanList = new List<string>
+    //{
+    //    "Robusta", "Jamaican", "Columbian", "Arabica", "Kopi Luwak"
+    //};
 
     public enum BeanEnum 
     {
@@ -141,7 +141,7 @@ class Espresso : Beverage
         Ingredients = new List<Ingredient>
         {
             new Ingredient() {Name = "Water", Amount = 25},
-            new Ingredient() {Name = BeanTypes.Beans[0], Amount = 25}
+            new Ingredient() {Name = BeanTypes.BeanEnum.Robusta.ToString(), Amount = 25}
         };
 
         CupType = "Small";
@@ -157,7 +157,7 @@ class Latte : Beverage
     {
         Ingredients = new List<Ingredient>
         {
-            new Ingredient() {Name = BeanTypes.Beans[3], Amount = 25},
+            new Ingredient() {Name = BeanTypes.BeanEnum.KopiLuwak.ToString(), Amount = 25},
             new Ingredient() {Name = "Milk", Amount = 25}
         };
 
@@ -174,7 +174,7 @@ class Mocha : Beverage
         Ingredients = new List<Ingredient>
         {
             new Ingredient() {Name = "Water", Amount = 25},
-            new Ingredient() {Name = "Robusta", Amount = 25}
+            new Ingredient() {Name = BeanTypes.BeanEnum.Robusta.ToString(), Amount = 25}
         };
 
         CupType = "Medium";
@@ -189,8 +189,8 @@ class Americano : Beverage
     {
         Ingredients = new List<Ingredient>
         {
-            new Ingredient() {Name = "Water", Amount = 25},
-            new Ingredient() {Name = "Robusta", Amount = 25}
+            new Ingredient() {Name = "Water", Amount = 100},
+            new Ingredient() {Name = BeanTypes.BeanEnum.Robusta.ToString(), Amount = 25}
         };
 
         CupType = "Medium";
@@ -205,11 +205,14 @@ class Cappuccino : Beverage
     {
         Ingredients = new List<Ingredient>
         {
-            new Ingredient() {Name = "Water", Amount = 25},
-            new Ingredient() {Name = "Robusta", Amount = 25}
+            new Ingredient() {Name = "Water", Amount = 50},
+            new Ingredient() {Name = BeanTypes.BeanEnum.Robusta.ToString(), Amount = 25},
+            new Ingredient() {Name = "Milk", Amount = 50},
+            new Ingredient() {Name = "MilkFoam", Amount = 50}
+
         };
 
-        CupType = "Medium";
+        CupType = "Large";
     }
 }
 class Macchiato : Beverage
@@ -222,7 +225,8 @@ class Macchiato : Beverage
         Ingredients = new List<Ingredient>
         {
             new Ingredient() {Name = "Water", Amount = 25},
-            new Ingredient() {Name = "Robusta", Amount = 25}
+            new Ingredient() {Name = BeanTypes.BeanEnum.Robusta.ToString(), Amount = 25},
+            new Ingredient() {Name = "MilkFoam", Amount = 125}
         };
 
         CupType = "Medium";
