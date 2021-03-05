@@ -1,10 +1,7 @@
 using System;
 using System.Collections.Generic;
-using System.ComponentModel.Design;
 using System.Linq;
 using System.Reflection;
-using System.Reflection.Metadata.Ecma335;
-
 
 public class Beverage
 {
@@ -13,6 +10,7 @@ public class Beverage
 
     public bool CheckIngredients(List<Ingredient> inputIngredients)
     {
+        //TODO: Keep checking if there are more ingredients than there should be
         //Check if every required ingredient matches the sent in ingredients
         foreach (Ingredient ingredient in Ingredients)
         {
@@ -53,6 +51,11 @@ public static class BeanTypes
     public static List<string> BeanList = new List<string>
     {
         "Robusta", "Jamaican", "Columbian", "Arabica", "Kopi Luwak"
+    };
+
+    public enum BeanEnum 
+    {
+        Robusta, Jamaican, Columbian, Arabica, KopiLuwak
     };
 }
 
@@ -106,7 +109,7 @@ public class EspressoMachine : IEspressoMachine
         Type target = typeof(Beverage);
         //Get all types that appear in the assembly that are inheriting from Beverage
         var types = assembly.GetTypes()
-            .Where(type => target.IsAssignableFrom(type) && type.Name != "Beverage");
+            .Where(type => target.IsAssignableFrom(type) && type.Name != "Beverage" && type.Name != "CustomBeverage");
 
         //Check ingredients for every matching class
         foreach (Type type in types)
@@ -119,8 +122,11 @@ public class EspressoMachine : IEspressoMachine
             }
         }
 
+        //TODO: Actually send back something useful for custom beverages
         //No matching recipes found
-        return new CustomBeverage();
+        CustomBeverage result = new CustomBeverage();
+        result.SetIngredientList(Ingredients);
+        return result;
     }
 }
 
@@ -232,8 +238,15 @@ class CustomBeverage : Beverage
         Ingredients = new List<Ingredient>
         {
         };
-
         CupType = "Medium";
+    }
+
+    public void SetIngredientList(List<Ingredient> newList)
+    {
+        foreach (Ingredient ingredient in newList)
+        {
+            Ingredients.Add(ingredient);
+        }
     }
 }
 
