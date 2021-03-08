@@ -12,7 +12,11 @@ public class Beverage
 
     public bool CheckIngredients(List<Ingredient> inputIngredients)
     {
-        //TODO: Keep checking if there are more ingredients than there should be
+        // Check if more or less ingredients than expected.
+        if (inputIngredients.Count != Ingredients.Count)
+        {
+            return false;
+        }
         //Check if every required ingredient matches the sent in ingredients
         foreach (Ingredient ingredient in Ingredients)
         {
@@ -36,7 +40,6 @@ public class Beverage
                 }
             }
         }
-
         return true;
     }
 }
@@ -65,6 +68,8 @@ public interface IEspressoMachine
     IEspressoMachine AddWater(int amount);
     IEspressoMachine AddMilk(int amount);
     IEspressoMachine AddBeans(string name, int amount);
+    IEspressoMachine AddChocolateSyrup(int amount);
+    IEspressoMachine AddMilkFoam(int amount);
     Beverage ToBeverage();
 }
 
@@ -105,6 +110,17 @@ public class EspressoMachine : IEspressoMachine
     public IEspressoMachine AddBeans(Ingredient ingredient)
     {
         Ingredients.Add(new Ingredient() { Name = ingredient.Name, Amount = ingredient.Amount });
+        return this;
+    }
+    public IEspressoMachine AddChocolateSyrup(int amount)
+    {
+        Ingredients.Add(new Ingredient() { Name = "Chocolate Syrup", Amount = amount });
+        return this;
+    }
+
+    public IEspressoMachine AddMilkFoam(int amount)
+    {
+        Ingredients.Add(new Ingredient() { Name = "Milk Foam", Amount = amount });
         return this;
     }
 
@@ -163,6 +179,7 @@ class Latte : Beverage
     {
         Ingredients = new List<Ingredient>
         {
+            new Ingredient() {Name = "Water", Amount = 25},
             new Ingredient() {Name = BeanTypes.BeanEnum.KopiLuwak.ToString(), Amount = 25},
             new Ingredient() {Name = "Milk", Amount = 25}
         };
@@ -180,7 +197,9 @@ class Mocha : Beverage
         Ingredients = new List<Ingredient>
         {
             new Ingredient() {Name = "Water", Amount = 25},
-            new Ingredient() {Name = BeanTypes.BeanEnum.Robusta.ToString(), Amount = 25}
+            new Ingredient() {Name = BeanTypes.BeanEnum.Robusta.ToString(), Amount = 25},
+            new Ingredient() {Name = "Chocolate Syrup", Amount = 15},
+            new Ingredient() {Name = "Milk", Amount = 50},
         };
 
         CupType = "Medium";
@@ -214,7 +233,7 @@ class Cappuccino : Beverage
             new Ingredient() {Name = "Water", Amount = 50},
             new Ingredient() {Name = BeanTypes.BeanEnum.Robusta.ToString(), Amount = 25},
             new Ingredient() {Name = "Milk", Amount = 50},
-            new Ingredient() {Name = "MilkFoam", Amount = 50}
+            new Ingredient() {Name = "Milk Foam", Amount = 50}
 
         };
 
@@ -232,7 +251,7 @@ class Macchiato : Beverage
         {
             new Ingredient() {Name = "Water", Amount = 25},
             new Ingredient() {Name = BeanTypes.BeanEnum.Robusta.ToString(), Amount = 25},
-            new Ingredient() {Name = "MilkFoam", Amount = 125}
+            new Ingredient() {Name = "Milk Foam", Amount = 125}
         };
 
         CupType = "Medium";
@@ -248,6 +267,7 @@ class CustomBeverage : Beverage
         Ingredients = new List<Ingredient>
         {
         };
+
         CupType = "Medium";
     }
 
