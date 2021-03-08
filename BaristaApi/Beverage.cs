@@ -20,8 +20,7 @@ public class Beverage
             foreach (Ingredient inputIngredient in inputIngredients)
             {
                 //Ingredient was found, moving on to next ingredient
-                //TODO: Check amount needed and not just name (within percentage of required amount/share?)
-                if (ingredient.Name == inputIngredient.Name && inputIngredient.Amount <= ingredient.Amount +5 && inputIngredient.Amount >= ingredient.Amount -2)
+                if (ingredient.Name == inputIngredient.Name && inputIngredient.Amount <= ingredient.Amount +3 && inputIngredient.Amount >= ingredient.Amount -3)
                 {
                     break;
                 }
@@ -101,6 +100,12 @@ public class EspressoMachine : IEspressoMachine
         return this;
     }
 
+    public IEspressoMachine AddBeans(Ingredient ingredient)
+    {
+        Ingredients.Add(new Ingredient() { Name = ingredient.Name, Amount = ingredient.Amount });
+        return this;
+    }
+
     public Beverage ToBeverage()
     {
         //What project/assembly to look through
@@ -122,7 +127,6 @@ public class EspressoMachine : IEspressoMachine
             }
         }
 
-        //TODO: Actually send back something useful for custom beverages
         //No matching recipes found
         CustomBeverage result = new CustomBeverage();
         result.SetIngredientList(Ingredients);

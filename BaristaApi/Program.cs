@@ -13,6 +13,7 @@ namespace BaristaApi
 
             //Latte input example
             Beverage coffee2 = new EspressoMachine().AddMilk(25).AddBeans(BeanTypes.BeanEnum.KopiLuwak.ToString(), 23).ToBeverage();
+            //Beverage coffee2 = new EspressoMachine().AddMilk(25).AddBeans(b => b.Name = BeanTypes.BeanEnum.KopiLuwak && b.Amount = 25).ToBeverage();
 
             Console.WriteLine("Got a " + coffee2.CupType.ToLower() + " cup of " + coffee2.ToString()?.ToLower());
 
