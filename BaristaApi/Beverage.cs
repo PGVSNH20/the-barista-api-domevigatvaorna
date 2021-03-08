@@ -2,7 +2,9 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
+using System.Runtime.CompilerServices;
 
+[assembly: InternalsVisibleTo("BaristaApi.Test")]
 public class Beverage
 {
     public virtual List<Ingredient> Ingredients { get; }
